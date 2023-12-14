@@ -1,7 +1,7 @@
 <html>
-    <title>Create Product</title>
+    <title>Edit Product</title>
     <body>
-        <h2>Create Product</h2>
+        <h2>Edit Product</h2>
         <hr>
         @if($errors->any())
             <ul>
@@ -10,25 +10,26 @@
             @endforeach
             </ul>
         @endif
-      <form action="{{ URL ('product') }}" method="POST" enctype="multipart/form-data">
+      <form action="{{ URL ('product') }}/{{ $product->id }}" method="POST" enctype="multipart/form-data">
         @csrf  
+        @method('PUT')
         <table>
                <tr>
                     <th>Product</th>
                     <td>
-                        <input type="text" name="product" required>
+                        <input type="text" name="product" value="{{ $product->product }}" required>
                     </td>
                 </tr>
                 <tr>
                     <th>Price</th>
                     <td>
-                        <input type="number" name="price" required>
+                        <input type="number" name="price" value="{{ $product->price }}"required>
                     </td>
                 </tr>
                 <tr>
                     <th>Stock</th>
                     <td>
-                        <input type="number" name="stock" required>
+                        <input type="number" name="stock" value="{{ $product->stock }}"required>
                     </td>
                 </tr>
         </table>
