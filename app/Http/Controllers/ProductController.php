@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
+    // function__construct(){
+    // |   $this->middleware('user')->except('destroy');
+    // }
     public function index()
     {
         $product = Product::get();

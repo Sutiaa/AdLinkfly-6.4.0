@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,12 +17,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-//Auth::routes();
-
+Auth::routes();
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //Route::get('/home', 'HomeController@index');
 
@@ -42,15 +43,16 @@ Route::get('/about', function () {
 //     return view('profile', ['nama' => $nama]); //compact('nama'));
 // });
 
-// Auth::routes();
-
 Route::resource('/profile', App\Http\Controllers\ProfileController::class);
-
-// Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('/product', App\Http\Controllers\ProductController::class);
+Route::middleware(['auth', 'user', 'admin'])->group(function () {
+    Route::resource('/product', App\Http\Controllers\ProductController::class);
+    Route::get('admin', function () {
+        return 'admin page';
+    });
+});
 
 Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel.index');
 Route::get('/artikel/create', [ArtikelController::class, 'create'])->name('artikel.create');

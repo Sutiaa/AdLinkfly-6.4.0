@@ -9,35 +9,37 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    // public function up(): void
-    // {
-    //     Schema::create('users', function (Blueprint $table) {
-    //         $table->id();
-    //         $table->string('name');
-    //         $table->string('email')->unique();
-    //         $table->timestamp('email_verified_at')->nullable();
-    //         $table->string('password');
-    //         $table->rememberToken();
-    //         $table->timestamps();
-    //     });
-
-    public function up()
+    public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->string('email')->unique();
-            $table->string('password');
-            $table->string('nama');
-            $table->date('tanggal_lahir');
-            $table->string('pekerjaan')->nullable();
-            $table->string('kota')->nullable();
-            $table->text('bio_profil')->nullable();
-            $table->string('gambar_profil')->default('default_profile.jpg');
-            $table->tinyInteger('background_profil')->default(1);
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->boolean('admin');
             $table->rememberToken();
             $table->timestamps();
         });
+
+        // public function up()
+        // {
+        //     Schema::create('users', function (Blueprint $table) {
+        //         $table->id();
+        //         $table->string('email')->unique();
+        //         $table->string('password');
+        //         $table->string('nama');
+        //         $table->date('tanggal_lahir');
+        //         $table->string('pekerjaan')->nullable();
+        //         $table->string('kota')->nullable();
+        //         $table->text('bio_profil')->nullable();
+        //         $table->string('gambar_profil')->default('default_profile.jpg');
+        //         $table->tinyInteger('background_profil')->default(1);
+        //         $table->timestamp('email_verified_at')->nullable();
+        //         $table->boolean('Admin');
+        //         $table->rememberToken();
+        //         $table->timestamps();
+        //     });
     }
 
     /**
