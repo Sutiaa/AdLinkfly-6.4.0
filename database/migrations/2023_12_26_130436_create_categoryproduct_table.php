@@ -8,28 +8,24 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('artikels', function (Blueprint $table) {
+        Schema::create('categoryproduct', function (Blueprint $table) {
             $table->id();
             $table->string('judul');
-            $table->string('gambar')->default('default.jpg');
-            $table->longText('isi');
-            $table->biginteger('created_by');
+            $table->string('isi');
+            $table->string('createdby');
+            $table->string('gambar');
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('artikels');
+        Schema::dropIfExists('categoryproduct');
     }
 };

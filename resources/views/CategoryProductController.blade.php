@@ -1,0 +1,2 @@
+{{$data['pageTitle'] }} 
+{{$data['content']}} 

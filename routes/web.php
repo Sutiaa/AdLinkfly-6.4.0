@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProdukController;
-use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\CategoryProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -23,8 +23,6 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-//Route::get('/home', 'HomeController@index');
 
 Route::get('/about', function () {
     $data = [
@@ -33,15 +31,6 @@ Route::get('/about', function () {
     ];
     return view('about', $data);
 });
-
-// Route::get('/produk', 'App\Http\Controllers\ProdukController@index');
-
-// Route::resource('produk', ProdukController::class, ['except' => ['create', 'update', 'delete', 'show']]);
-
-// Route::get('/profile', function () {
-//     $nama = "Sutia";
-//     return view('profile', ['nama' => $nama]); //compact('nama'));
-// });
 
 Route::resource('/profile', App\Http\Controllers\ProfileController::class);
 
@@ -54,10 +43,29 @@ Route::middleware(['auth', 'user', 'admin'])->group(function () {
     });
 });
 
-Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel.index');
-Route::get('/artikel/create', [ArtikelController::class, 'create'])->name('artikel.create');
-Route::post('/artikel', [ArtikelController::class, 'store'])->name('artikel.store');
-Route::put('/artikel/{id}', [ArtikelController::class, 'update'])->name('artikel.update');
-Route::get('/artikel/{id}/edit', [ArtikelController::class, 'edit'])->name('artikel.edit');
-Route::get('/artikel/{id}', [ArtikelController::class, 'show'])->name('artikel.show');
-Route::delete('/artikel/{id}', [ArtikelController::class, 'destroy'])->name('artikel.delete');
+Route::middleware(['auth', 'user', 'admin'])->group(function () {
+    Route::resource('/categoryproduct', App\Http\Controllers\CategoryProductController::class);
+    Route::get('admin', function () {
+        return 'admin page';
+    });
+});
+
+
+// Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel.index');
+// Route::get('/artikel/create', [ArtikelController::class, 'create'])->name('artikel.create');
+// Route::post('/artikel', [ArtikelController::class, 'store'])->name('artikel.store');
+// Route::put('/artikel/{id}', [ArtikelController::class, 'update'])->name('artikel.update');
+// Route::get('/artikel/{id}/edit', [ArtikelController::class, 'edit'])->name('artikel.edit');
+// Route::get('/artikel/{id}', [ArtikelController::class, 'show'])->name('artikel.show');
+// Route::delete('/artikel/{id}', [ArtikelController::class, 'destroy'])->name('artikel.delete');
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', 'HomeController@index');
+// Route::get('/produk', 'App\Http\Controllers\ProdukController@index');
+
+// Route::resource('produk', ProdukController::class, ['except' => ['create', 'update', 'delete', 'show']]);
+
+// Route::get('/profile', function () {
+//     $nama = "Sutia";
+//     return view('profile', ['nama' => $nama]); //compact('nama'));
+// });

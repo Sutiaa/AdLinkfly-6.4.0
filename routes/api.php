@@ -21,3 +21,11 @@ Route::delete('product/{id}', 'App\Http\Controllers\ApiController@product_delete
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('categoryproduct', 'App\Http\Controllers\ApiController@categoryproduct_index');
+Route::post('categoryproduct/add', 'App\Http\Controllers\ApiController@categoryproduct_store');
+Route::get('categoryproduct/{id}', 'App\Http\Controllers\ApiController@categoryproduct_by_id');
+Route::delete('categoryproduct/{id}', 'App\Http\Controllers\ApiController@categoryproduct_delete');
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
