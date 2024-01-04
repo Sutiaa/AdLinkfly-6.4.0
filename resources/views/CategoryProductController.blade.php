@@ -1,2 +1,0 @@
-{{$data['pageTitle'] }} 
-{{$data['content']}} 

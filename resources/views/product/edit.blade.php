@@ -27,6 +27,7 @@
                     </td>
                 </tr>
                 <tr>
+
                     <th>Stock</th>
                     <td>
                         <input type="number" name="stock" value="{{ $product->stock }}"required>

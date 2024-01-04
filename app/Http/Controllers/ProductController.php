@@ -11,23 +11,26 @@ use Illuminate\Support\Facades\Validator;
 class ProductController extends Controller
 {
     // function__construct(){
-    // |   $this->middleware('user')->except('destroy');
+    //    $this->middleware('user')->except('destroy');
     // }
+
     public function index()
     {
         $product = Product::get();
         return view('product.index', compact('product'));
     }
+
     public function create()
     {
         return view('product.create');
     }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'product'   => 'required|min:6',
-            'price'     => 'required|min:4',
-            'stock'     => 'required|min:1',
+            'price'     => 'required',
+            'stock'     => 'required',
         ], [
             'product.required' => 'Nama Produk harus di isi.',
             'price.required' => 'Harga harus di isi.',
@@ -57,6 +60,7 @@ class ProductController extends Controller
         $product->save();
         return redirect('/product')->with('success', 'Data produk berhasil di update');
     }
+
     public function destroy($id)
     {
         $product = Product::find($id);
@@ -67,6 +71,7 @@ class ProductController extends Controller
             return redirect('/product')->with('success', 'Data produk gagal di delete');
         }
     }
+
     //   public function show ($product)
     //   {
     //     $product =  Product::findOrFail($product);

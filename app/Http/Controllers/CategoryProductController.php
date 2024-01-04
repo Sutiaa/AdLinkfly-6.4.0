@@ -23,11 +23,11 @@ class CategoryProductController extends Controller
             'judul'   => 'required|min:5|max:255',
             'isi'     => 'string',
             'createdby'     => 'string',
-            'gambar'  => 'base64',
+            'gambar'  => 'image',
         ], [
             'judul.required' => 'Judul Produk harus di isi.',
             'isi.required' => 'Masukkan isi.',
-            'cretedby.required' => 'Nama Pembuat harus di isi.',
+            'createdby.required' => 'Nama Pembuat harus di isi.',
             'gambar.required'   => 'Masukkan Gambar',
         ]);
 
@@ -36,7 +36,7 @@ class CategoryProductController extends Controller
             'judul'       => $request->judul,
             'isi'       => $request->isi,
             'createdby'       => $request->createdby,
-            'gambar'    => $request->gambar,
+            'gambar'    => $request->image,
         ]);
 
         return redirect('/categoryproduct');
@@ -52,7 +52,7 @@ class CategoryProductController extends Controller
         $categoryproduct->judul = $request->judul;
         $categoryproduct->isi = $request->isi;
         $categoryproduct->createdby = $request->createdby;
-        $categoryproduct->createdby = $request->gambar;
+        $categoryproduct->gambar = $request->gambar;
         $categoryproduct->save();
         return redirect('/categoryproduct')->with('success', 'Data produk berhasil di update');
     }

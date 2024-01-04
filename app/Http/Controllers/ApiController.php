@@ -31,8 +31,17 @@ class ApiController extends Controller
     }
     public function product_by_id($id)
     {
-        $product = Product::where('id', $id)->get();
+        $product = Product::where('id', $id)->first();
         return response()->json($product);
+    }
+    public function product_update($id, Request $Request)
+    {
+        $product = Product::where('id', $id)->update([
+            'product'   => $Request->api_product,
+            'price'     => $Request->api_price,
+            'stock'     => $Request->api_stock,
+        ]);
+        return response()->json($id);
     }
     public function product_delete($id)
     {
@@ -42,7 +51,7 @@ class ApiController extends Controller
             'responseCode'      => '00',
             'responseStatus'    => 'Success Delete'
         );
-        return response()->json($id);
+        return response()->json($response);
     }
 
     public function categoryproduct_index()
@@ -67,19 +76,30 @@ class ApiController extends Controller
         );
         return response()->json($response);
     }
-    public function categoryproduct_by_id($id)
-    {
-        $categoryproduct = CategoryProduct::where('id', $id)->get();
-        return response()->json($categoryproduct);
-    }
-    public function categoryproduct_delete($id)
-    {
-        CategoryProduct::where('id', $id)->delete();
 
-        $response = array(
-            'responseCode'      => '00',
-            'responseStatus'    => 'Success Delete'
-        );
-        return response()->json($id);
+    public function create_product()
+    {
+        $formData = [
+            'product'       => null,
+            'price'         => null,
+            'stock'         => null,
+        ];
+
+        return response()->json($formData);
     }
+    // public function categoryproduct_by_id($id)
+    // {
+    //     $categoryproduct = CategoryProduct::where('id', $id)->get();
+    //     return response()->json($categoryproduct);
+    // }
+    // public function categoryproduct_delete($id)
+    // {
+    //     CategoryProduct::where('id', $id)->delete();
+
+    //     $response = array(
+    //         'responseCode'      => '00',
+    //         'responseStatus'    => 'Success Delete'
+    //     );
+    //     return response()->json($id);
+    // }
 }
